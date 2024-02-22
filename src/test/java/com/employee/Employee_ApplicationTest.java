@@ -1,7 +1,6 @@
 package com.employee;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.employee.controller.EmployeeController;
@@ -60,7 +58,6 @@ public class Employee_ApplicationTest {
 		assertEquals(employee_dto, employeeController.retrieveEmployeeById(1).getBody());
 	}
 
-	// Update Employee
 	@Test
 	public void updateEmployeeById_Test() {
 		
