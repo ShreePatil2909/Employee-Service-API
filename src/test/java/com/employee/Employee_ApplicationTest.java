@@ -2,6 +2,7 @@ package com.employee;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.employee.controller.EmployeeController;
 import com.employee.dto.Employee_DTO;
+import com.employee.entity.Employee;
 import com.employee.service.EmployeeService;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +35,6 @@ public class Employee_ApplicationTest {
 	@Mock
 	Employee_DTO employee_dto;
 
-	// Create
 	@Test
 	public void createEmployee_Test() {
 
@@ -42,7 +43,6 @@ public class Employee_ApplicationTest {
 		assertEquals(employee_dto, employeeController.createEmployee(employee_dto).getBody());
 	}
 
-	// Get AllEmployee
 	@Test
 	public void retrieveAllEmployee_Test() {
 
@@ -53,7 +53,6 @@ public class Employee_ApplicationTest {
 		employeeController.retrieveAllEmployee();
 	}
 
-	// Get ById
 	@Test
 	public void retrieveEmployeeById_Test() {
 		
@@ -69,17 +68,14 @@ public class Employee_ApplicationTest {
 		employeeController.updateEmployeeById(2, employee_dto);
 	}
 
-	// Delete Employee
 	@Test
 	public void deleteById_Test() {
 
-		doNothing().when(employeeService.deleteEmployeeById(Mockito.anyInt()));
-		employeeController.deleteEmployeeById(1);
-		verify(employeeService).deleteEmployeeById(1);
-
+		Employee emp = new Employee(1, "AA", "BB", "abc@ag", "HR");
+		employeeService.deleteEmployeeById(emp.getId());
+		verify(employeeService, times(1)).deleteEmployeeById(1);
 	}
 
-	// SortedByName
 	@Test
 	public void getEmployeeBySortingName_Test() {
 
